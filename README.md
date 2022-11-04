@@ -27,10 +27,8 @@ The projectB1 folder contains:
 
 - projectB1.Rmd: R markdown file with code for function writing, documentation and testing of part B1 of the project.
 - projectB1.md: Rendered markdown document of part B1.
-- projectB1_files/figures-gfm: contains figures of part B1.
   
 The projectB2 folder contains: 
 
 - projectB2.Rmd: R markdown file with code for R package building, documentation, and testing of part B2 of the project.
 - projectB2.md: Rendered markdown document of part B2.
-- projectB2_files/figures-gfm: contains figures of part B2.
