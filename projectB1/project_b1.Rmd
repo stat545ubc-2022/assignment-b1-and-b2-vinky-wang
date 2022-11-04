@@ -1,16 +1,18 @@
 ---
-title: 'Assignment b1'
-output: html_document
+title: 'Project B1'
+output: github_document
 ---
 
 # Exercise 1 and 2: Making and Documenting a Function
+
+We'll write a function `na_summary()` and document it using roxygen2 tags.
 
 ```{r}
 #' Missing and Non-Missing Values Summary
 #' Summarizes the count and percentage of missing and non-missing values in each column of a data frame.
 #' 
 #' @param df An object of class "data.frame". Named df as short for data frame.
-#' @return An object of class "data.frame" in a long data format.
+#' @return An object of class "data.frame" in a long data format that summarizes the count and percentage of missing and non-missing values in each column of a data frame.
 #' @export 
 
 na_summary <- function(df){
@@ -34,10 +36,14 @@ na_summary <- function(df){
 }
 ```
 
+
 # Exercise 3: Demonstrating Examples
 
+The function `na_summary()` was inspired by the tasks of exploring many datasets in the `datateachr` package. 
+We'll run `na_summary()` on the `apt_buildings` and `vancouver_trees` datasets from `datateachr`. 
+
 ```{r error = TRUE}
-# Load data ---------------------------
+# Load packages  ---------------------------
 library(datateachr)
 
 # Run na_summary() on data ---------------------------
@@ -52,31 +58,85 @@ apt_buildings %>%
 
 
 ```
+Notice that `na_summary()` works on a data frame with columns of various object classes. 
+
+```{r}
+glimpse(apt_buildings)
+glimpse(vancouver_trees)
+```
+
+We can also create a new data frame or one from an existing object to run `na_summary()`.
+
+```{r}
+# Create a non data frame object ---------------------------
+# matrix array object
+alpha_num <- cbind(col1= 1:3, col2 = c("A", "B", "C"))
+alpha_num
+class(alpha_num)
+
+# Convert into data frame object ---------------------------
+alpha_num_df <- data.frame(alpha_num)
+
+# Run na_summary() ---------------------------
+na_summary(alpha_num_df)
+```
+
+Overall, `na_summary()` is helpful for exploring data and making informed decisions on if/how we should use variables. 
+
+
+
+
 
 # Exercise 4: Testing Function
 
+We'll use the `testthat` package to run formal tests for our function. 
+
 ```{r}
+# Load packages  ---------------------------
 library(testthat)
+```
 
+**Test 1**
+We expect an error message when `na_summary()` is used on an object that is not of class data.frame. 
+We evaluated this on objects of class character, integer, and matrix array. 
+```{r}
 test_that("Function returns error if df is not a data.frame object", {
-  expect_error(na_summary(apt_buildings$air_conditioning))
-  expect_error(na_summary(apt_buildings$no_of_units))
-  expect_error(na_summary(cbind(apt_buildings$air_conditioning, apt_buildings$no_of_units)))
+  expect_error(na_summary(letters)) 
+  expect_error(na_summary(1:26))
+  expect_error(na_summary(cbind(letters, 1:26)))
 })
+```
 
-test_that("Function returns dataframe of missing and non-missing values summary when df consists entirely of NAs or no NAs", {
-  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c("A", "B", "C"))), "data.frame")
-  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c(NA, NA, NA))), "data.frame")
-})
+**Test 2**
+We expect an error message when `na_summary()` is used on a data.frame object of zero dimension. 
+We evaluated this on a dataframe with zero dimension only of the row, only of the column, and of both the column and row. 
 
-test_that("Function returns dataframe of missing and non-missing values summary when df consists entirely of values of class numeric or character", {
-  expect_s3_class(na_summary(data.frame(col1=("C, B, A"), col2=c("A", "B", "C"))), "data.frame")
-  expect_s3_class(na_summary(data.frame(col1=1:3, col2= 4:6)), "data.frame")
-})
-
+```{r}
 test_that("Function returns error when df has zero dimension", {
   expect_error(na_summary(data.frame()))
   expect_error(na_summary(data.frame(col1 = numeric(0), col2 = character(0))))
+  expect_error(na_summary(data.frame(numeric(0))))
+})
+```
+
+**Test 3**
+We expect `na_summary()` to return a data.frame of summarized missing and non-missing values on a data.frame with columns of mixed class types; numeric and character. 
+
+```{r}
+test_that("Function returns dataframe of missing and non-missing values summary when df consists of numeric and character class types", {
+  expect_s3_class(na_summary(data.frame(col1=("C, B, A"), col2=c("A", "NA", "C"))), "data.frame")
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2= c(4, NA, 5))), "data.frame")
+})
+
+```
+
+**Test 4**
+We expect `na_summary()` to return a data.frame of summarized missing and non-missing values on a data.frame consisting of entirely all NA or none NA values. 
+
+```{r}
+test_that("Function returns data frame of missing and non-missing values summary when df consists entirely of NAs or no NAs", {
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c("A", "B", "C"))), "data.frame")
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c(NA, NA, NA))), "data.frame")
 })
 ```
 
