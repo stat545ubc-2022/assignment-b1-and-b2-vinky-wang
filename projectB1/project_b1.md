@@ -37,6 +37,8 @@ na_summary <- function(df){
 
 # Exercise 3: Demonstrating Examples
 
+## Example 1
+
 The function `na_summary()` was inspired by the tasks of exploring many
 datasets in the `datateachr` package. We’ll run `na_summary()` on the
 `apt_buildings` and `vancouver_trees` datasets from `datateachr`.
@@ -207,6 +209,8 @@ glimpse(vancouver_trees)
     ## $ longitude          <dbl> -123.1161, -123.1147, -123.0846, -123.0870, -123.08…
     ## $ latitude           <dbl> 49.21776, 49.21776, 49.23938, 49.23469, 49.23894, 4…
 
+## Example 2
+
 We can also create a new data frame or one from an existing object to
 run `na_summary()`.
 
@@ -277,9 +281,11 @@ library(testthat)
     ## 
     ##     matches
 
-**Test 1** We expect an error message when `na_summary()` is used on an
-object that is not of class data.frame. We evaluated this on objects of
-class character, integer, and matrix array.
+## Test 1
+
+We expect an error message when `na_summary()` is used on an object that
+is not of class data.frame. We evaluated this on objects of class
+character, integer, and matrix array.
 
 ``` r
 test_that("Function returns error if df is not a data.frame object", {
@@ -289,12 +295,14 @@ test_that("Function returns error if df is not a data.frame object", {
 })
 ```
 
-    ## Test passed 😀
+    ## Test passed 😸
 
-**Test 2** We expect an error message when `na_summary()` is used on a
-data.frame object of zero dimension. We evaluated this on a dataframe
-with zero dimension only of the row, only of the column, and of both the
-column and row.
+## Test 2
+
+We expect an error message when `na_summary()` is used on a data.frame
+object of zero dimension. We evaluated this on a dataframe with zero
+dimension only of the row, only of the column, and of both the column
+and row.
 
 ``` r
 test_that("Function returns error when df has zero dimension", {
@@ -304,11 +312,13 @@ test_that("Function returns error when df has zero dimension", {
 })
 ```
 
-    ## Test passed 🥳
+    ## Test passed 🥇
 
-**Test 3** We expect `na_summary()` to return a data.frame of summarized
-missing and non-missing values on a data.frame with columns of mixed
-class types; numeric and character.
+## Test 3
+
+We expect `na_summary()` to return a data.frame of summarized missing
+and non-missing values on a data.frame with columns of mixed class
+types; numeric and character.
 
 ``` r
 test_that("Function returns dataframe of missing and non-missing values summary when df consists of numeric and character class types", {
@@ -319,9 +329,11 @@ test_that("Function returns dataframe of missing and non-missing values summary 
 
     ## Test passed 🌈
 
-**Test 4** We expect `na_summary()` to return a data.frame of summarized
-missing and non-missing values on a data.frame consisting of entirely
-all NA or none NA values.
+## Test 4
+
+We expect `na_summary()` to return a data.frame of summarized missing
+and non-missing values on a data.frame consisting of entirely all NA or
+none NA values.
 
 ``` r
 test_that("Function returns data frame of missing and non-missing values summary when df consists entirely of NAs or no NAs", {
@@ -330,4 +342,4 @@ test_that("Function returns data frame of missing and non-missing values summary
 })
 ```
 
-    ## Test passed 🌈
+    ## Test passed 🎉
