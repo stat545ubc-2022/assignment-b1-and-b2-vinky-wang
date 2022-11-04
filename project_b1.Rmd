@@ -1,0 +1,82 @@
+---
+title: 'Assignment b1'
+output: html_document
+---
+
+# Exercise 1 and 2: Making and Documenting a Function
+
+```{r}
+#' Missing and Non-Missing Values Summary
+#' Summarizes the count and percentage of missing and non-missing values in each column of a data frame.
+#' 
+#' @param df An object of class "data.frame". Named df as short for data frame.
+#' @return An object of class "data.frame" in a long data format.
+#' @export 
+
+na_summary <- function(df){
+  if(!require(tidyverse)){
+    stop("The tidyverse packages must be installed. Run install.packages(\"tidyverse\") and then try again.")
+  }
+  if(!is.data.frame(df)){
+    stop("This function only works for object of class \"data.frame\" \n", "You have provided an object of class:", class(df))
+  }
+  if(nrow(df) == 0 | ncol(df) == 0){
+    stop("This function only works for \"data.frame\" object of non-zero dimensions")
+  }
+  df %>%
+    gather(key = "key", value = "val") %>%
+    mutate(is_na = is.na(val)) %>%
+    group_by(key) %>%
+    mutate(total = n()) %>%
+    group_by(key, total, is_na) %>%
+    summarise(na_count = n()) %>%
+    mutate(na_pct = na_count/total *100)
+}
+```
+
+# Exercise 3: Demonstrating Examples
+
+```{r error = TRUE}
+# Load data ---------------------------
+library(datateachr)
+
+# Run na_summary() on data ---------------------------
+# Complete dataset
+na_summary(apt_buildings)
+na_summary(vancouver_trees)
+
+# Subset of the dataset
+apt_buildings %>%
+    select(ward, prop_management_company_name, year_built, no_of_storeys, no_of_units, property_type, no_barrier_free_accessible_units, no_of_accessible_parking_spaces, heating_type) %>%
+  na_summary()
+
+
+```
+
+# Exercise 4: Testing Function
+
+```{r}
+library(testthat)
+
+test_that("Function returns error if df is not a data.frame object", {
+  expect_error(na_summary(apt_buildings$air_conditioning))
+  expect_error(na_summary(apt_buildings$no_of_units))
+  expect_error(na_summary(cbind(apt_buildings$air_conditioning, apt_buildings$no_of_units)))
+})
+
+test_that("Function returns dataframe of missing and non-missing values summary when df consists entirely of NAs or no NAs", {
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c("A", "B", "C"))), "data.frame")
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2=c(NA, NA, NA))), "data.frame")
+})
+
+test_that("Function returns dataframe of missing and non-missing values summary when df consists entirely of values of class numeric or character", {
+  expect_s3_class(na_summary(data.frame(col1=("C, B, A"), col2=c("A", "B", "C"))), "data.frame")
+  expect_s3_class(na_summary(data.frame(col1=1:3, col2= 4:6)), "data.frame")
+})
+
+test_that("Function returns error when df has zero dimension", {
+  expect_error(na_summary(data.frame()))
+  expect_error(na_summary(data.frame(col1 = numeric(0), col2 = character(0))))
+})
+```
+
