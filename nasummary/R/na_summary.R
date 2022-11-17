@@ -11,9 +11,6 @@
 #' na_summary(data.frame(col1=("C, B, A"), col2=c("A", "NA", "C")))
 #' na_summary(data.frame(col1=1:3, col2= c(4, NA, 5)))
 na_summary <- function(df){
-  if(!require(tidyverse)){
-    stop("The tidyverse packages must be installed. Run install.packages(\"tidyverse\") and then try again.")
-  }
   if(nrow(df) == 0 | ncol(df) == 0){
     stop("This function only works for \"data.frame\" object of non-zero dimensions")
   }
