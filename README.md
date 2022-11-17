@@ -20,27 +20,28 @@ install.packages("devtools")
 devtools::install_github("UBC-MDS/datateachr")
 ```
 
-To install `nasummary`, the package created in part B2 which wraps the function `na_summary()` from part B1
+To install `nasummary`, the package created in part B2 which wraps the function `na_summary()` created in part B1
 
 ```{r}
 # install.packages("devtools")
-devtools::install_github("stat545ubc-2022/assignment-b1-and-b2-vinky-wang/projectB2")
+devtools::install_github("stat545ubc-2022/assignment-b1-and-b2-vinky-wang/nasummary")
 ```
 
-See more details regarding `nasummary` in the projectB2 folder. 
 
 ## Navigating the repository
 
 The projectB1 folder contains: 
 
-- projectB1.Rmd: R markdown file with code for function writing, documentation and testing of part B1 of the project.
-- projectB1.md: Rendered markdown document of part B1.
+- projectB1.Rmd: R markdown file with code for function writing, documentation and testing
+- projectB1.md: Rendered markdown document of the above
   
-The projectB2 folder contains: 
+The nasummary folder contains: 
 
-- NAMESPACE: describes which functions used from other packages 
 - DESCRIPTION: provides metadata about the package
-- README.Rmd (and README.md): elaborates on package information
-- R/ directory: contains the function
-- tests/ directory: contains the tests 
-- man/ directory: documents the function
+- LICENSE (and LICENSE.md): package license
+- man/ directory: documentation of the function
+- NAMESPACE: describes function(s) used from other packages 
+- R/ directory: contains code of the function
+- README.Rmd (and README.md): elaborates on the package information
+- tests/ directory: contains tests of the function
+
