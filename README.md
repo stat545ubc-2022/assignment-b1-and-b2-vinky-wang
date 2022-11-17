@@ -36,11 +36,11 @@ The projectB1 folder contains:
   
 The nasummary folder contains: 
 
-- DESCRIPTION: provides metadata about the package
+- DESCRIPTION: package metadata
 - LICENSE (and LICENSE.md): package license
-- man/ directory: documentation for the function
-- NAMESPACE: describes functions intended to be used by a package user 
-- R/ directory: contains function code
-- README.Rmd (and README.md): elaborates on the package information
-- tests/ directory: contains function tests
+- man/ directory: function documentation
+- NAMESPACE: functions intended to be used by a package user 
+- R/ directory: function code
+- README.Rmd (and README.md): further package information
+- tests/ directory: function tests
 
