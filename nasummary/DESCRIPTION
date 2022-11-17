@@ -1,9 +1,9 @@
 Package: nasummary
-Title: Summarizes Missing and Non-Missing Values for Data Frame Columns 
+Title: Missing and Non-Missing Values Summary
 Version: 0.1.0
 Authors@R: 
     person("Vinky", "Wang", , "vinky293@gmail.com", role = c("aut", "cre"))
-Description: Summarizes the count and percentage of missing and non-missing values for each columns of a dataframe. 
+Description: Summarizes the count and percentage of missing and non-missing values in each column of a data frame. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
