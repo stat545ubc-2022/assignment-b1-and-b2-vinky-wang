@@ -23,7 +23,11 @@ devtools::install_github("UBC-MDS/datateachr")
 To install `nasummary`, the package created in part B2 which wraps the function `na_summary()` created in part B1
 
 ```{r}
-# install.packages("devtools")
+if(!require(somepackage)){
+    install.packages("somepackage")
+    library(somepackage)
+}
+
 devtools::install_github("stat545ubc-2022/assignment-b1-and-b2-vinky-wang/nasummary")
 ```
 
