@@ -38,9 +38,9 @@ The nasummary folder contains:
 
 - DESCRIPTION: provides metadata about the package
 - LICENSE (and LICENSE.md): package license
-- man/ directory: documentation of the function
-- NAMESPACE: describes function(s) used from other packages 
-- R/ directory: contains code of the function
+- man/ directory: documentation for the function
+- NAMESPACE: describes functions intended to be used by a package user 
+- R/ directory: contains function code
 - README.Rmd (and README.md): elaborates on the package information
-- tests/ directory: contains tests of the function
+- tests/ directory: contains function tests
 
