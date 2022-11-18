@@ -6,7 +6,9 @@
 #'
 #' @return An object of class "data.frame" in a long data format that summarizes the count and percentage of missing and non-missing values in each column of a data frame.
 #' @export
-#'
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+#' @importFrom dplyr n
 #' @examples
 #' na_summary(data.frame(col1=("C, B, A"), col2=c("A", "NA", "C")))
 #' na_summary(data.frame(col1=1:3, col2= c(4, NA, 5)))
@@ -16,10 +18,10 @@ na_summary <- function(df){
   }
   df %>%
     tidyr::gather(key = "key", value = "val") %>%
-    dplyr::mutate(is_na = is.na(val)) %>%
-    dplyr::group_by(key) %>%
+    dplyr::mutate(is_na = is.na(.data$val)) %>%
+    dplyr::group_by(.data$key) %>%
     dplyr:: mutate(total = n()) %>%
-    dplyr::group_by(key, total, is_na) %>%
+    dplyr::group_by(.data$key, .data$total, .data$is_na) %>%
     dplyr::summarise(na_count = n()) %>%
-    dplyr::mutate(na_pct = na_count/total *100)
+    dplyr::mutate(na_pct = .data$na_count/.data$total *100)
 }
