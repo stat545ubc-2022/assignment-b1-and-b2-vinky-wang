@@ -24,7 +24,7 @@ data format.
 
 ## Installation
 
-You can install the development version of nasummary from
+You can install the development version of `nasummary` from
 [GitHub](https://github.com/):
 
 ``` r
@@ -49,15 +49,6 @@ alpha_num_df <- data.frame(alpha_num)
 
 # Run na_summary() ---------------------------
 library(nasummary)
-#> Loading required package: tidyverse
-#> ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-#> ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
-#> ✔ tibble  3.1.8      ✔ dplyr   1.0.10
-#> ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-#> ✔ readr   2.1.3      ✔ forcats 0.5.2 
-#> ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
 na_summary(alpha_num_df)
 #> # A tibble: 2 × 5
 #> # Groups:   key, total [2]

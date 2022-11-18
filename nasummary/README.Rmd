@@ -22,7 +22,7 @@ The goal of `nasummary` is to summarize the count and percentage of missing and 
 
 ## Installation
 
-You can install the development version of nasummary from [GitHub](https://github.com/): 
+You can install the development version of `nasummary` from [GitHub](https://github.com/): 
 
 ```{r message=FALSE}
 # install.packages("devtools")
